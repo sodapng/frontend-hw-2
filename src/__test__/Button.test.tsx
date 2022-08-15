@@ -111,7 +111,7 @@ describe('Тестирование компонента Button', () => {
     expect(mockOnClick).toBeCalledTimes(1);
   });
 
-  test('Пропс color учавствует в формировании класса на кнопке', () => {
+  test('Пропс color участвует в формировании класса на кнопке', () => {
     const { rerender } = render(
       <Button color={ButtonColor.primary} data-testid={Locators.BUTTON}>
         {BUTTON_TEXT}
@@ -253,8 +253,4 @@ describe('Тестирование компонента Button', () => {
     expect(buttonElement).toHaveAttribute('name', name);
     expect(buttonElement).toHaveStyle({ width });
   });
-
-  test.todo(
-    'Для управления css-классами должна использоваться библиотека classnames'
-  );
 });

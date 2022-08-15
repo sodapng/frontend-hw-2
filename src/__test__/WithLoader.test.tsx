@@ -25,23 +25,24 @@ describe('Тестирование компонента WithLoader', () => {
     expect(loaderElement).not.toBeVisible();
   });
 
-  test('Вложенные элементы отображаются при любых значениях loading', () => {
-    const content = 'some_text_content'
+  test('Изменение children', () => {
     const { rerender } = render(
-      <WithLoader loading>
-        {content}
+      <WithLoader loading={false}>
+        <div data-testid="with-loader-old-content">old content</div>
       </WithLoader>
     );
 
-    const contentEl = screen.getByText(content);
+    const contentEl = screen.getByTestId('with-loader-old-content');
     expect(contentEl).toBeVisible();
 
     rerender(
       <WithLoader loading={false}>
-        <div>content</div>
+        <div data-testid="with-loader-new-content">content</div>
       </WithLoader>
     );
 
-    expect(contentEl).toBeVisible();
+    const newContentEl = screen.getByTestId('with-loader-new-content');
+
+    expect(newContentEl).toBeVisible();
   });
 });

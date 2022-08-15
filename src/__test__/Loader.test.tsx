@@ -2,6 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { Locators } from './constants';
 import { Loader } from '../components/Loader/Loader';
+import { LoaderSize } from './MockLoader';
 
 describe('Тестирование компонента Loader', () => {
   test('По умолчанию рендерится в один html-элемент (возможны потомки)', () => {
@@ -39,5 +40,36 @@ describe('Тестирование компонента Loader', () => {
     const container = screen.getByTestId(Locators.TEST_CONTAINER);
 
     expect(container.firstChild).toHaveClass(testClassName);
+  });
+
+  test('По умолчанию LoaderSize.m', () => {
+    const testClassName = 'loader_size-m';
+    render(
+      <div data-testid={Locators.TEST_CONTAINER}>
+        <Loader />
+      </div>
+    );
+
+    const container = screen.getByTestId(Locators.TEST_CONTAINER);
+
+    expect(container.firstChild).toHaveClass(testClassName);
+  });
+
+  test('При изменении size изменяется и className', () => {
+    const { rerender } = render(
+      <div data-testid={Locators.TEST_CONTAINER}>
+        <Loader />
+      </div>
+    );
+
+    const container = screen.getByTestId(Locators.TEST_CONTAINER);
+
+    expect(container.firstChild).toHaveClass('loader_size-m');
+
+    rerender(<div data-testid={Locators.TEST_CONTAINER}>
+      <Loader size={LoaderSize.s} />
+    </div>)
+
+    expect(container.firstChild).toHaveClass('loader_size-s');
   });
 });
