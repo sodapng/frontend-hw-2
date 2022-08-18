@@ -1,8 +1,8 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import { Locators } from './constants';
-import userEvent from '@testing-library/user-event';
-import { CheckBox } from '../components/CheckBox/CheckBox';
+import { CheckBox } from '../components/CheckBox/CheckBox'
+import { Locators } from './constants'
+import { render, screen } from '@testing-library/react'
+import React from 'react'
+import userEvent from '@testing-library/user-event'
 
 describe('Тестирование компонента CheckBox', () => {
   test('Значение чекбокса зависит от пропса checked', () => {
@@ -12,11 +12,11 @@ describe('Тестирование компонента CheckBox', () => {
         onChange={() => {}}
         data-testid={Locators.CHECKBOX}
       />
-    );
+    )
 
-    const checkBoxElement = screen.getByTestId(Locators.CHECKBOX);
+    const checkBoxElement = screen.getByTestId(Locators.CHECKBOX)
 
-    expect(checkBoxElement).toHaveAttribute('checked');
+    expect(checkBoxElement).toHaveAttribute('checked')
 
     rerender(
       <CheckBox
@@ -24,24 +24,24 @@ describe('Тестирование компонента CheckBox', () => {
         onChange={() => {}}
         data-testid={Locators.CHECKBOX}
       />
-    );
-    expect(checkBoxElement).not.toHaveAttribute('checked', 'false');
-  });
+    )
+    expect(checkBoxElement).not.toHaveAttribute('checked', 'false')
+  })
 
   test('При клике на чекбокс вызывается onChange со значением', () => {
-    const mockOnChange = jest.fn();
+    const mockOnChange = jest.fn()
     const { rerender } = render(
       <CheckBox
         checked={true}
         onChange={mockOnChange}
         data-testid={Locators.CHECKBOX}
       />
-    );
+    )
 
-    const checkBoxElement = screen.getByTestId(Locators.CHECKBOX);
+    const checkBoxElement = screen.getByTestId(Locators.CHECKBOX)
 
-    userEvent.click(checkBoxElement);
-    expect(mockOnChange).toBeCalledWith(false);
+    userEvent.click(checkBoxElement)
+    expect(mockOnChange).toBeCalledWith(false)
 
     rerender(
       <CheckBox
@@ -49,23 +49,29 @@ describe('Тестирование компонента CheckBox', () => {
         onChange={mockOnChange}
         data-testid={Locators.CHECKBOX}
       />
-    );
+    )
 
-    userEvent.click(checkBoxElement);
-    expect(mockOnChange).toBeCalledWith(true);
-  });
+    userEvent.click(checkBoxElement)
+    expect(mockOnChange).toBeCalledWith(true)
+  })
 
   test('Компонент CheckBox использует html-тег input', () => {
-    render(<CheckBox checked={true} onChange={() => {}} data-testid={Locators.CHECKBOX} />);
+    render(
+      <CheckBox
+        checked={true}
+        onChange={() => {}}
+        data-testid={Locators.CHECKBOX}
+      />
+    )
 
-    const inputElement = screen.getByTestId(Locators.CHECKBOX);
+    const inputElement = screen.getByTestId(Locators.CHECKBOX)
 
-    expect(inputElement.tagName).toBe('INPUT');
-    expect(inputElement).toHaveAttribute('type', 'checkbox');
-  });
+    expect(inputElement.tagName).toBe('INPUT')
+    expect(inputElement).toHaveAttribute('type', 'checkbox')
+  })
 
   test('При передаче disabled=true не вызывается onChange', () => {
-    const mockOnChange = jest.fn();
+    const mockOnChange = jest.fn()
     const { rerender } = render(
       <CheckBox
         disabled
@@ -73,12 +79,12 @@ describe('Тестирование компонента CheckBox', () => {
         onChange={mockOnChange}
         data-testid={Locators.CHECKBOX}
       />
-    );
+    )
 
-    const checkBoxElement = screen.getByTestId(Locators.CHECKBOX);
+    const checkBoxElement = screen.getByTestId(Locators.CHECKBOX)
 
-    userEvent.click(checkBoxElement);
-    expect(mockOnChange).not.toBeCalled();
+    userEvent.click(checkBoxElement)
+    expect(mockOnChange).not.toBeCalled()
 
     rerender(
       <CheckBox
@@ -86,11 +92,11 @@ describe('Тестирование компонента CheckBox', () => {
         onChange={mockOnChange}
         data-testid={Locators.CHECKBOX}
       />
-    );
+    )
 
-    userEvent.click(checkBoxElement);
-    expect(mockOnChange).toBeCalled();
-  });
+    userEvent.click(checkBoxElement)
+    expect(mockOnChange).toBeCalled()
+  })
 
   test('При передаче disabled проставляется атрибут disabled на чекбоксе', () => {
     const { rerender } = render(
@@ -100,10 +106,10 @@ describe('Тестирование компонента CheckBox', () => {
         onChange={() => {}}
         data-testid={Locators.CHECKBOX}
       />
-    );
+    )
 
-    const checkBoxElement = screen.getByTestId(Locators.CHECKBOX);
-    expect(checkBoxElement).toHaveAttribute('disabled');
+    const checkBoxElement = screen.getByTestId(Locators.CHECKBOX)
+    expect(checkBoxElement).toHaveAttribute('disabled')
 
     rerender(
       <CheckBox
@@ -112,8 +118,8 @@ describe('Тестирование компонента CheckBox', () => {
         onChange={() => {}}
         data-testid={Locators.CHECKBOX}
       />
-    );
+    )
 
-    expect(checkBoxElement).not.toHaveAttribute('disabled', false);
-  });
-});
+    expect(checkBoxElement).not.toHaveAttribute('disabled', false)
+  })
+})

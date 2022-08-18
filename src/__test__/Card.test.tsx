@@ -1,19 +1,19 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import { Card } from '../components/Card/Card';
-import userEvent from '@testing-library/user-event';
-import { CARD_SUBTITLE, CARD_TITLE, Locators } from './constants';
+import { CARD_SUBTITLE, CARD_TITLE, Locators } from './constants'
+import { Card } from '../components/Card/Card'
+import { render, screen } from '@testing-library/react'
+import React from 'react'
+import userEvent from '@testing-library/user-event'
 
 describe('Тестирование компонента Card', () => {
   test('Пропсы title, subtitle передаются и отображаются', () => {
-    render(<Card title={CARD_TITLE} subtitle={CARD_SUBTITLE} image="--" />);
+    render(<Card title={CARD_TITLE} subtitle={CARD_SUBTITLE} image="--" />)
 
-    const title = screen.getByText(CARD_TITLE);
-    const subtitle = screen.getByText(CARD_SUBTITLE);
+    const title = screen.getByText(CARD_TITLE)
+    const subtitle = screen.getByText(CARD_SUBTITLE)
 
-    expect(title).toBeInTheDocument();
-    expect(subtitle).toBeInTheDocument();
-  });
+    expect(title).toBeInTheDocument()
+    expect(subtitle).toBeInTheDocument()
+  })
 
   test('Пропс title в виде элемента передается и отображается', () => {
     render(
@@ -22,12 +22,12 @@ describe('Тестирование компонента Card', () => {
         subtitle={CARD_SUBTITLE}
         image="--"
       />
-    );
+    )
 
-    const title = screen.getByTestId(Locators.CARD_TITLE);
+    const title = screen.getByTestId(Locators.CARD_TITLE)
 
-    expect(title).toBeInTheDocument();
-  });
+    expect(title).toBeInTheDocument()
+  })
 
   test('Пропс subtitle в виде элемента передается и отображается', () => {
     render(
@@ -36,35 +36,35 @@ describe('Тестирование компонента Card', () => {
         subtitle={<div data-testid={Locators.CARD_SUBTITLE} />}
         image="--"
       />
-    );
+    )
 
-    const title = screen.getByTestId(Locators.CARD_SUBTITLE);
+    const title = screen.getByTestId(Locators.CARD_SUBTITLE)
 
-    expect(title).toBeInTheDocument();
-  });
+    expect(title).toBeInTheDocument()
+  })
 
   test('Пропс image передаются корректно в картинку', () => {
-    const testImageSrc = 'https://www.google.com/favicon.ico';
+    const testImageSrc = 'https://www.google.com/favicon.ico'
     render(
       <Card image={testImageSrc} title={CARD_TITLE} subtitle={CARD_SUBTITLE} />
-    );
+    )
 
-    const imageElement = screen.getByRole('img');
+    const imageElement = screen.getByRole('img')
 
-    expect(imageElement).toBeInTheDocument();
-    expect(imageElement).toHaveAttribute('src', testImageSrc);
-  });
+    expect(imageElement).toBeInTheDocument()
+    expect(imageElement).toHaveAttribute('src', testImageSrc)
+  })
 
   test('Для изображения используется html-тег img', () => {
-    const testImageSrc = 'https://www.google.com/favicon.ico';
+    const testImageSrc = 'https://www.google.com/favicon.ico'
     const { baseElement } = render(
       <Card image={testImageSrc} title={CARD_TITLE} subtitle={CARD_SUBTITLE} />
-    );
+    )
 
     const imageElement = baseElement.querySelector('img')
 
-    expect(imageElement).toHaveAttribute('src', testImageSrc);
-  });
+    expect(imageElement).toHaveAttribute('src', testImageSrc)
+  })
 
   test('Пропс content передаются и отображается', () => {
     const { rerender } = render(
@@ -74,17 +74,17 @@ describe('Тестирование компонента Card', () => {
         title={CARD_TITLE}
         subtitle={CARD_SUBTITLE}
       />
-    );
+    )
 
-    const content = screen.getByTestId(Locators.CARD_CONTENT);
-    expect(content).toBeInTheDocument();
+    const content = screen.getByTestId(Locators.CARD_CONTENT)
+    expect(content).toBeInTheDocument()
 
-    rerender(<Card image="-" title={CARD_TITLE} subtitle={CARD_SUBTITLE} />);
-    expect(content).not.toBeInTheDocument();
-  });
+    rerender(<Card image="-" title={CARD_TITLE} subtitle={CARD_SUBTITLE} />)
+    expect(content).not.toBeInTheDocument()
+  })
 
   test('При клике вызывается onClick, если передан', () => {
-    const mockOnClick = jest.fn();
+    const mockOnClick = jest.fn()
     render(
       <div data-testid={Locators.TEST_CONTAINER}>
         <Card
@@ -94,13 +94,13 @@ describe('Тестирование компонента Card', () => {
           image="-"
         />
       </div>
-    );
+    )
 
-    const container = screen.getByTestId(Locators.TEST_CONTAINER);
-    const cardElement = container.firstChild;
+    const container = screen.getByTestId(Locators.TEST_CONTAINER)
+    const cardElement = container.firstChild
 
-    expect(cardElement).toBeInTheDocument();
-    userEvent.click(cardElement as Element);
-    expect(mockOnClick).toBeCalledTimes(1);
-  });
-});
+    expect(cardElement).toBeInTheDocument()
+    userEvent.click(cardElement as Element)
+    expect(mockOnClick).toBeCalledTimes(1)
+  })
+})

@@ -1,9 +1,9 @@
-import { render, screen } from '@testing-library/react';
-import React from 'react';
-import { WithLoader } from '../components/WithLoader/WithLoader';
-import { Locators } from './constants';
+import { Locators } from './constants'
+import { WithLoader } from '../components/WithLoader/WithLoader'
+import { render, screen } from '@testing-library/react'
+import React from 'react'
 
-jest.mock('../components/Loader/Loader.tsx', () => require('./MockLoader'));
+jest.mock('../components/Loader/Loader.tsx', () => require('./MockLoader'))
 
 describe('Тестирование компонента WithLoader', () => {
   test('При передаче loading=true отображается Loader', () => {
@@ -11,38 +11,38 @@ describe('Тестирование компонента WithLoader', () => {
       <WithLoader loading>
         <div>content</div>
       </WithLoader>
-    );
+    )
 
-    const loaderElement = screen.getByTestId(Locators.LOADER);
-    expect(loaderElement).toBeVisible();
+    const loaderElement = screen.getByTestId(Locators.LOADER)
+    expect(loaderElement).toBeVisible()
 
     rerender(
       <WithLoader loading={false}>
         <div>content</div>
       </WithLoader>
-    );
+    )
 
-    expect(loaderElement).not.toBeVisible();
-  });
+    expect(loaderElement).not.toBeVisible()
+  })
 
   test('Изменение children', () => {
     const { rerender } = render(
       <WithLoader loading={false}>
         <div data-testid="with-loader-old-content">old content</div>
       </WithLoader>
-    );
+    )
 
-    const contentEl = screen.getByTestId('with-loader-old-content');
-    expect(contentEl).toBeVisible();
+    const contentEl = screen.getByTestId('with-loader-old-content')
+    expect(contentEl).toBeVisible()
 
     rerender(
       <WithLoader loading={false}>
         <div data-testid="with-loader-new-content">content</div>
       </WithLoader>
-    );
+    )
 
-    const newContentEl = screen.getByTestId('with-loader-new-content');
+    const newContentEl = screen.getByTestId('with-loader-new-content')
 
-    expect(newContentEl).toBeVisible();
-  });
-});
+    expect(newContentEl).toBeVisible()
+  })
+})

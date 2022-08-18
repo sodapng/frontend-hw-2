@@ -1,0 +1,13 @@
+.button {
+  &_color-primary {
+    background-color: #ff5555;
+  }
+
+  &_color-secondary {
+    background-color: #339999;
+  }
+
+  &_disabled {
+    background-color: #d9d9d9;
+  }
+}
